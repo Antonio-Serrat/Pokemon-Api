@@ -2,12 +2,9 @@
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.pokemon.api.service.Interface.PokemonI;
+import com.pokemon.api.service.Interface.IPokemon;
 
 import lombok.AllArgsConstructor;
 
@@ -16,7 +13,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PokemonController {
 
-	private final PokemonI IPok;
+	private final IPokemon IPok;
 	
 	
 	@GetMapping("/pokemons")
@@ -28,8 +25,8 @@ public class PokemonController {
 		}
 	}
 	
-	@GetMapping("/pokemon/{id}")
-	public ResponseEntity<?> pokemonInfo(){
+	@GetMapping("/pokemon/{name}")
+	public ResponseEntity<?> pokemonInfo(@PathVariable String name){
 		try {
 			return null;
 		} catch (Exception e) {

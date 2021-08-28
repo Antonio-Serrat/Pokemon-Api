@@ -1,4 +1,4 @@
-package com.pokemon.api.model;
+package com.pokemon.api.model.pokemons;
 
 import java.util.List;
 

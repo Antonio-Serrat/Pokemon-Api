@@ -1,6 +1,4 @@
-package com.pokemon.api.model;
-
-import java.util.List;
+package com.pokemon.api.model.pokemons.atributes;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,11 +10,8 @@ import lombok.Data;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Pokemon {
+public class Ability {
 
 	private String name;
-	private String 	weight;
-	private Sprites sprites;
-	private List<Types> types;
-	private List<Abilities> abilities;
+	private String url;
 }

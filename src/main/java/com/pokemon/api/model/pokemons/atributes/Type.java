@@ -1,4 +1,4 @@
-package com.pokemon.api.model;
+package com.pokemon.api.model.pokemons.atributes;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,7 +10,8 @@ import lombok.Data;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Types {
+public class Type {
 
-	private Type type;
+	private String name;
+	private String url;
 }
