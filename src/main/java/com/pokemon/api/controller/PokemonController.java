@@ -22,9 +22,18 @@ public class PokemonController {
 	@GetMapping("/pokemons")
 	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(IPok.getPokemonsInfo(limit, offset));
+			return ResponseEntity.status(HttpStatus.OK).body(IPok.getAllPokemons(limit, offset));
 		}catch (Exception e){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error"+ e.getMessage());
+		}
+	}
+	
+	@GetMapping("/pokemon/{id}")
+	public ResponseEntity<?> pokemonInfo(){
+		try {
+			return null;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 	
