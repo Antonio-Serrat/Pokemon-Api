@@ -1,4 +1,4 @@
-	package com.pokemon.api.controller;
+package com.pokemon.api.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
