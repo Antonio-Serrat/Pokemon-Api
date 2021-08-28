@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemon.api.dto.PokemonBasicDto;
 import com.pokemon.api.dto.PokemonPlusInfoDto;
 import com.pokemon.api.model.pokemons.InfoPokemons;
 import com.pokemon.api.model.pokemons.PokemonsUris;
+import com.pokemon.api.model.pokemons.atributes.Characteristic;
 import com.pokemon.api.search.Interface.IGoPokeApi;
 import com.pokemon.api.service.Interface.IPokemon;
 
@@ -20,7 +20,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ImplPokemon implements IPokemon {
 	private final IGoPokeApi IGo;
-	private final ObjectMapper mapper = new ObjectMapper();	
 	private final URI baseUrl = URI.create("https://pokeapi.co/api/v2/");
 
 	
@@ -33,23 +32,28 @@ public class ImplPokemon implements IPokemon {
 	@Override
 	public List<PokemonBasicDto> getAllPokemons(int limit, int offset) {
 		InfoPokemons info = IGo.getPokemonsInfo(limit, offset);
-		List<PokemonBasicDto> pokemones = new ArrayList<>();
+		List<PokemonBasicDto> pokemons = new ArrayList<>();
 		List<PokemonsUris> infos = info.getResults();
 		
-		for (PokemonsUris pokemonsUris : infos) {
+		for(PokemonsUris pokemonsUris : infos) {
 			PokemonBasicDto pokemonBasicDto = IGo.getPokemon(URI.create(pokemonsUris.getUrl()));
 			pokemonBasicDto.setName(pokemonsUris.getName());
-			pokemones.add(pokemonBasicDto);			
+			pokemons.add(pokemonBasicDto);			
 		};	
-		return pokemones;
+		return pokemons;
 	}
 
 
 	@Override
 	public PokemonPlusInfoDto getPokemonByName(String name) {
-		URI uri = URI.create(baseUrl + "pokemon/" + name);
-		IGo.getPokemon(uri);
-		return null;
+		URI uriPokemon = URI.create(baseUrl + "pokemon/" + name);		
+		PokemonPlusInfoDto pokemon = IGo.getPokemonInfo(uriPokemon);
+		
+		int id = pokemon.getId();
+		URI uriDes = URI.create(baseUrl + "characteristic/" + id);
+		Characteristic characteristic = IGo.getDescription(uriDes);
+		pokemon.setCharacteristic(characteristic);
+		return pokemon;
 	}
 	
 }

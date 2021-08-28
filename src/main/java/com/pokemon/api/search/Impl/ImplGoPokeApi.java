@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import com.pokemon.api.dto.PokemonBasicDto;
 import com.pokemon.api.dto.PokemonPlusInfoDto;
 import com.pokemon.api.model.pokemons.InfoPokemons;
-import com.pokemon.api.model.pokemons.atributes.Descriptions;
+import com.pokemon.api.model.pokemons.atributes.Characteristic;
 import com.pokemon.api.search.Interface.IGoPokeApi;
 
 @Service
@@ -27,14 +27,13 @@ public class ImplGoPokeApi implements IGoPokeApi{
 	}
 
 	@Override
-	public Descriptions getDescription(URI uri, int id) {
-		return restTemplate.getForObject(baseUrl + "characteristic/" + id, Descriptions.class);
+	public Characteristic getDescription(URI uri) {
+		return restTemplate.getForObject(uri, Characteristic.class);
 	}
 
 	@Override
 	public PokemonPlusInfoDto getPokemonInfo(URI uri) {
-		// TODO Auto-generated method stub
-		return null;
+		return restTemplate.getForObject(uri, PokemonPlusInfoDto.class);
 	}
 	
 	

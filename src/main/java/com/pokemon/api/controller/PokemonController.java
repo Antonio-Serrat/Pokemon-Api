@@ -21,16 +21,16 @@ public class PokemonController {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(IPok.getAllPokemons(limit, offset));
 		}catch (Exception e){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error"+ e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error "+ e.getMessage());
 		}
 	}
 	
 	@GetMapping("/pokemon/{name}")
 	public ResponseEntity<?> pokemonInfo(@PathVariable String name){
 		try {
-			return null;
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(IPok.getPokemonByName(name));
 		} catch (Exception e) {
-			return null;
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error "+ e.getMessage());
 		}
 	}
 	
