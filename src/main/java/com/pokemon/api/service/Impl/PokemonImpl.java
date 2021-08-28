@@ -1,37 +1,40 @@
 package com.pokemon.api.service.Impl;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemon.api.model.InfoPokemons;
+import com.pokemon.api.model.Pokemon;
+import com.pokemon.api.search.Interface.IGoPokeApi;
 import com.pokemon.api.service.Interface.PokemonI;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class PokemonImpl implements PokemonI {
-	
-	private final RestTemplate restTemplate = new RestTemplate();
-	private final URI baseUrl = URI.create("https://pokeapi.co/api/v2/pokemon");
+	private final IGoPokeApi IGo;
 	private final ObjectMapper mapper = new ObjectMapper();	
 	
 	
 	@Override
 	public InfoPokemons getPokemonsInfo(int limit, int offset) {
-		
-		
-		return restTemplate.getForObject(baseUrl+"?limit="+limit+"$offset="+offset, InfoPokemons.class);
+		return IGo.getPokemonsInfo(limit, offset);
 	}
 
 
-//	@Override
-//	public List<Pokemon> getAllPokemons(InfoPokemons info) {
-//		return info.getResults().stream()
-//				.map(p -> {
-//					Pokemon pokemone = 
-//				});
-//	}
+	@Override
+	public List<Pokemon> getAllPokemons(InfoPokemons info) {
+		return info.getResults().stream().parallel()
+				.map(p -> {
+					Pokemon pokemone = IGo.getPokemon(URI.create(p.getUrl()));
+				})
+				
+				;
+	}
 	
 	
 }
