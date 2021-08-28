@@ -1,6 +1,7 @@
 package com.pokemon.api.service.Impl;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemon.api.model.InfoPokemons;
 import com.pokemon.api.model.Pokemon;
+import com.pokemon.api.model.PokemonsUris;
 import com.pokemon.api.search.Interface.IGoPokeApi;
 import com.pokemon.api.service.Interface.PokemonI;
 
@@ -25,16 +27,19 @@ public class PokemonImpl implements PokemonI {
 		return IGo.getPokemonsInfo(limit, offset);
 	}
 
-
-	@Override
-	public List<Pokemon> getAllPokemons(InfoPokemons info) {
-		return info.getResults().stream().parallel()
-				.map(p -> {
-					Pokemon pokemone = IGo.getPokemon(URI.create(p.getUrl()));
-				})
-				
-				;
-	}
 	
+	@Override
+	public List<Pokemon> getAllPokemons(int limit, int offset) {
+		InfoPokemons info = IGo.getPokemonsInfo(limit, offset);
+		List<Pokemon> pokemones = new ArrayList<>();
+		List<PokemonsUris> infos = info.getResults();
+		
+		for (PokemonsUris pokemonsUris : infos) {
+			Pokemon pokemon = IGo.getPokemon(URI.create(pokemonsUris.getUrl()));
+			pokemon.setName(pokemonsUris.getName());
+			pokemones.add(pokemon);			
+		};	
+		return pokemones;
+	}
 	
 }
