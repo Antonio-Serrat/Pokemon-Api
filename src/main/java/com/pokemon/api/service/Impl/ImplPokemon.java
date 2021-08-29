@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pokemon.api.dto.PokemonBasicDto;
@@ -19,6 +20,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class ImplPokemon implements IPokemon {
+	@Autowired
 	private final IGoPokeApi IGo;
 	private final URI baseUrl = URI.create("https://pokeapi.co/api/v2/");
 

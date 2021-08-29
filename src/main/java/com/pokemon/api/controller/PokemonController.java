@@ -1,5 +1,6 @@
 package com.pokemon.api.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class PokemonController {
 
+	@Autowired
 	private final IPokemon IPok;
 	
 	
