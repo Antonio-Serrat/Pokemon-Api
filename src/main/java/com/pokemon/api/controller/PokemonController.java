@@ -10,14 +10,14 @@ import com.pokemon.api.service.Interface.IPokemon;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/")
+@RequestMapping(path = "/api/")
 @AllArgsConstructor
 public class PokemonController {
 
 	private final IPokemon IPok;
 	
 	
-	@GetMapping
+	@GetMapping("pokemons")
 	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(JsonPath.parse(IPok.getAllPokemons(limit, offset)));
