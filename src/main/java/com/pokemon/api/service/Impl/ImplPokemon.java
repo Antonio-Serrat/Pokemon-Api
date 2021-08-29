@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.pokemon.api.dto.PokemonBasicDto;
@@ -32,7 +34,7 @@ public class ImplPokemon implements IPokemon {
 
 	
 	@Override
-	public List<PokemonBasicDto> getAllPokemons(int limit, int offset) {
+	public ResponseEntity<List<PokemonBasicDto>> getAllPokemons(int limit, int offset) {
 		InfoPokemons info = IGo.getPokemonsInfo(limit, offset);
 		List<PokemonBasicDto> pokemons = new ArrayList<>();
 		List<PokemonsUris> infos = info.getResults();
@@ -42,7 +44,7 @@ public class ImplPokemon implements IPokemon {
 			pokemonBasicDto.setName(pokemonsUris.getName());
 			pokemons.add(pokemonBasicDto);			
 		};	
-		return pokemons;
+		return ResponseEntity.status(HttpStatus.OK).body(pokemons);
 	}
 
 
