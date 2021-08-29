@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping(path = "/api/")
 @AllArgsConstructor
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET})
 public class PokemonController {
 
 	@Autowired
