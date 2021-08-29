@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping(path = "/api/")
 @AllArgsConstructor
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET})
 public class PokemonController {
 
 	private final IPokemon IPok;
