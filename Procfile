@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.pokemon.api.MainApplication
+web: java -jar target/poke-api-0.0.1-SNAPSHOT.jar
