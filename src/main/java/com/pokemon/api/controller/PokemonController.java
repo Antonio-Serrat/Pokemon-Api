@@ -20,7 +20,7 @@ public class PokemonController {
 	
 	
 	@GetMapping(path = "pokemons")
-	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset){
+	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset) throws Exception {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(IPok.getAllPokemons(limit, offset));
 		}catch (Exception e){
@@ -29,7 +29,7 @@ public class PokemonController {
 	}
 	
 	@GetMapping(path = "pokemon/{name}")
-	public ResponseEntity<?> pokemonInfo(@PathVariable String name){
+	public ResponseEntity<?> pokemonInfo(@PathVariable String name) throws Exception{
 		try {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(IPok.getPokemonByName(name));
 		} catch (Exception e) {
