@@ -17,7 +17,7 @@ public class PokemonController {
 	private final IPokemon IPok;
 	
 	
-	@GetMapping("pokemons")
+	@GetMapping(path = "pokemons")
 	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset){
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(IPok.getAllPokemons(limit, offset));
@@ -26,7 +26,7 @@ public class PokemonController {
 		}
 	}
 	
-	@GetMapping("pokemon/{name}")
+	@GetMapping(path = "pokemon/{name}")
 	public ResponseEntity<?> pokemonInfo(@PathVariable String name){
 		try {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(IPok.getPokemonByName(name));
