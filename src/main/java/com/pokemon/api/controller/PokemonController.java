@@ -29,7 +29,7 @@ public class PokemonController {
 	@GetMapping("pokemon/{name}")
 	public ResponseEntity<?> pokemonInfo(@PathVariable String name){
 		try {
-			return ResponseEntity.status(HttpStatus.ACCEPTED).body(IPok.getPokemonByName(name));
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(JsonPath.parse(IPok.getPokemonByName(name)));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error "+ e.getMessage());
 		}
