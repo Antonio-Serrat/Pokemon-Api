@@ -55,6 +55,8 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+        			<mainClass>controller.Application</mainClass>
+       				<layout>ZIP</layout>
 				</configuration>
 				<executions>
 			        <execution>
