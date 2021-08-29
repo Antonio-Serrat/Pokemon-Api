@@ -20,12 +20,12 @@ public class PokemonController {
 	
 	
 	@GetMapping(path = "pokemons")
-	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset) throws Exception {
-		try {
+	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset)  {
+		
 			return ResponseEntity.status(HttpStatus.OK).body(IPok.getAllPokemons(limit, offset));
-		}catch (Exception e){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error "+ e.getMessage());
-		}
+		
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error "+ e.getMessage());
+		
 	}
 	
 	@GetMapping(path = "pokemon/{name}")
