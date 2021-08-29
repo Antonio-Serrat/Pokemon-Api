@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.jayway.jsonpath.JsonPath;
 import com.pokemon.api.service.Interface.IPokemon;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +19,7 @@ public class PokemonController {
 	@GetMapping("pokemons")
 	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(JsonPath.parse(IPok.getAllPokemons(limit, offset)));
+			return ResponseEntity.status(HttpStatus.OK).body(IPok.getAllPokemons(limit, offset));
 		}catch (Exception e){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error "+ e.getMessage());
 		}
@@ -29,7 +28,7 @@ public class PokemonController {
 	@GetMapping("pokemon/{name}")
 	public ResponseEntity<?> pokemonInfo(@PathVariable String name){
 		try {
-			return ResponseEntity.status(HttpStatus.ACCEPTED).body(JsonPath.parse(IPok.getPokemonByName(name)));
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(IPok.getPokemonByName(name));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error "+ e.getMessage());
 		}
