@@ -55,7 +55,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-        			<mainClass>controller.Application</mainClass>
+        			<mainClass>com.pokemon.api.PokeApiApplication</mainClass>
        				<layout>ZIP</layout>
 				</configuration>
 				<executions>
