@@ -14,7 +14,7 @@ com/pokemon/api/model/pokemons/atributes/Ability.class
 com/pokemon/api/model/pokemons/atributes/Type.class
 com/pokemon/api/model/pokemons/atributes/Description.class
 com/pokemon/api/model/pokemons/atributes/Moves.class
+com/pokemon/api/MainApplication.class
 com/pokemon/api/service/Impl/ImplPokemon.class
-com/pokemon/api/PokeApiApplication.class
 com/pokemon/api/dto/PokemonPlusInfoDto.class
 com/pokemon/api/model/pokemons/atributes/Types.class
