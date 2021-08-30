@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.*;
 
 import com.pokemon.api.service.Interface.IPokemon;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping(path = "/api")
 @AllArgsConstructor
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET})
 public class PokemonController {
 
 	@Autowired
@@ -20,6 +20,7 @@ public class PokemonController {
 	
 	
 	@GetMapping(path = "/pokemons")
+    @ApiOperation("Can list all the Pokemons you want ")
 	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(IPok.getAllPokemons(limit, offset));
@@ -29,6 +30,7 @@ public class PokemonController {
 	}
 	
 	@GetMapping(path = "/pokemon/{name}")
+    @ApiOperation("Search your favorite Pokemon by name")
 	public ResponseEntity<?> pokemonInfo(@PathVariable String name) {
 		try {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(IPok.getPokemonByName(name));
