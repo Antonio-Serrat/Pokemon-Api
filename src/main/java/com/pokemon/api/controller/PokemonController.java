@@ -19,7 +19,6 @@ public class PokemonController {
 	private final IPokemon IPok;
 	
 	
-	@CrossOrigin(origins = "*")
 	@GetMapping(path = "/pokemons")
     @ApiOperation("Can list all the Pokemons you want ")
 	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset) {
@@ -30,7 +29,6 @@ public class PokemonController {
 		}
 	}
 	
-	@CrossOrigin(origins = "*")
 	@GetMapping(path = "/pokemon/{name}")
     @ApiOperation("Search your favorite Pokemon by name")
 	public ResponseEntity<?> pokemonInfo(@PathVariable String name) {
