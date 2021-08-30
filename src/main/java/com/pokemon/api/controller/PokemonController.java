@@ -21,6 +21,7 @@ public class PokemonController {
 	
 	@GetMapping(path = "/pokemons")
     @ApiOperation("Can list all the Pokemons you want ")
+	@CrossOrigin(origins = "https://pokeapi.co/api/v2/*")
 	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(IPok.getAllPokemons(limit, offset));
@@ -31,6 +32,7 @@ public class PokemonController {
 	
 	@GetMapping(path = "/pokemon/{name}")
     @ApiOperation("Search your favorite Pokemon by name")
+	@CrossOrigin(origins = "https://pokeapi.co/api/v2/*")
 	public ResponseEntity<?> pokemonInfo(@PathVariable String name) {
 		try {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(IPok.getPokemonByName(name));
