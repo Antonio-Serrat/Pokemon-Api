@@ -2,6 +2,10 @@
 *.class*
 .project
 .factory*
+.settings/
+
+.gwt/
+target/*
 
 # Log file
 *.log
