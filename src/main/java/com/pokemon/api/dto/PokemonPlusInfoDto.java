@@ -22,6 +22,6 @@ public class PokemonPlusInfoDto {
 	private List<Types> types;
 	private List<Abilities> abilities;
 	private List<Moves> moves;
-	private Characteristic characteristic;
+	private Description characteristic;
 
 }

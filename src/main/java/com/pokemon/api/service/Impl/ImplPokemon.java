@@ -11,6 +11,7 @@ import com.pokemon.api.dto.PokemonPlusInfoDto;
 import com.pokemon.api.model.pokemons.InfoPokemons;
 import com.pokemon.api.model.pokemons.PokemonsUris;
 import com.pokemon.api.model.pokemons.atributes.Characteristic;
+import com.pokemon.api.model.pokemons.atributes.Description;
 import com.pokemon.api.search.Interface.IGoPokeApi;
 import com.pokemon.api.service.Interface.IPokemon;
 
@@ -52,7 +53,14 @@ public class ImplPokemon implements IPokemon {
 		int id = pokemon.getId();
 		URI uriDes = URI.create(baseUrl + "characteristic/" + id);
 		Characteristic characteristic = IGo.getDescription(uriDes);
-		pokemon.setCharacteristic(characteristic);
+		
+		for (Description des : characteristic.getDescriptions()) {
+			String languaje = des.getLanguage().getName();
+		 
+			if(languaje.matches("es")) {
+				pokemon.setCharacteristic(des);
+			}
+		}
 		return pokemon;
 	}
 	
