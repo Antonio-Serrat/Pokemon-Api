@@ -21,7 +21,7 @@ public class ImplGoPokeApi implements IGoPokeApi{
 	@Override
 	@Cacheable("PokemonsInfo")
 	public InfoPokemons getPokemonsInfo(int limit, int offset) {	
-		return restTemplate.getForObject(baseUrl + "/pokemon?limit=" + limit + "$offset=" + offset, InfoPokemons.class);
+		return restTemplate.getForObject(baseUrl + "/pokemon?limit=" + limit + "&offset=" + offset, InfoPokemons.class);
 	}
 
 	@Override

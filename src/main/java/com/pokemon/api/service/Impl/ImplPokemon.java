@@ -1,13 +1,13 @@
 package com.pokemon.api.service.Impl;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.pokemon.api.dto.PokemonBasicDto;
 import com.pokemon.api.dto.PokemonPlusInfoDto;
+import com.pokemon.api.model.pagin.PaginatedPokemons;
 import com.pokemon.api.model.pokemons.InfoPokemons;
 import com.pokemon.api.model.pokemons.PokemonsUris;
 import com.pokemon.api.model.pokemons.atributes.Characteristic;
@@ -31,15 +31,18 @@ public class ImplPokemon implements IPokemon {
 
 	
 	@Override
-	public List<PokemonBasicDto> getAllPokemons(int limit, int offset) {
+	public PaginatedPokemons getAllPokemons(int limit, int offset) {
 		InfoPokemons info = IGo.getPokemonsInfo(limit, offset);
-		List<PokemonBasicDto> pokemons = new ArrayList<>();
+		PaginatedPokemons pokemons = new PaginatedPokemons();
+		pokemons.setNext(info.getNext());
+		pokemons.setPrevious(info.getPrevious());
 		List<PokemonsUris> infos = info.getResults();
 		
 		for(PokemonsUris pokemonsUris : infos) {
 			PokemonBasicDto pokemonBasicDto = IGo.getPokemon(URI.create(pokemonsUris.getUrl()));
 			pokemonBasicDto.setName(pokemonsUris.getName());
-			pokemons.add(pokemonBasicDto);			
+			pokemons.getPokemons().add(pokemonBasicDto);
+			
 		};	
 		return pokemons;
 	}

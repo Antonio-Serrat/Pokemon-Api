@@ -6,13 +6,14 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import lombok.Data;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Data
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class InfoPokemons {
 	
 	private int count;
 	private String next;
 	private String previous;
 	private List<PokemonsUris> results;
+
 	
 }
