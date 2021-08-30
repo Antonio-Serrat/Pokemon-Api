@@ -18,15 +18,6 @@ public class PokemonController {
 	@Autowired
 	private final IPokemon IPok;
 	
-	@GetMapping
-	public ResponseEntity<?> Welcome() {
-		try {
-			return ResponseEntity.status(HttpStatus.OK).body("hello");
-		}catch (Exception e){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Has an error "+ e.getMessage());
-		}
-	}
-	
 	
 	@GetMapping(path = "/pokemons")
 	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset) {
