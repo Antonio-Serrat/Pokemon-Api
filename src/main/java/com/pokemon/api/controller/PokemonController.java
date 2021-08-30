@@ -19,7 +19,7 @@ public class PokemonController {
 	private final IPokemon IPok;
 	
 	
-	@CrossOrigin(origins = "https://pokeapi.co/api/v2")
+	@CrossOrigin(origins = "https://pokedex-api-java.herokuapp.com")
 	@GetMapping(path = "/pokemons")
     @ApiOperation("Can list all the Pokemons you want ")
 	public ResponseEntity<?> allPokemons(@RequestParam int limit, int offset) {
@@ -30,7 +30,7 @@ public class PokemonController {
 		}
 	}
 	
-	@CrossOrigin(origins = "https://pokeapi.co/api/v2")
+	@CrossOrigin(origins = "https://pokedex-api-java.herokuapp.com")
 	@GetMapping(path = "/pokemon/{name}")
     @ApiOperation("Search your favorite Pokemon by name")
 	public ResponseEntity<?> pokemonInfo(@PathVariable String name) {
