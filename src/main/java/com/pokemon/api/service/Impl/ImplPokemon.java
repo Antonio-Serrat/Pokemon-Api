@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.pokemon.api.dto.CharacteristicsUrlDTO;
 import com.pokemon.api.dto.PokemonBasicDto;
+import com.pokemon.api.dto.PokemonDescriptionsDto;
 import com.pokemon.api.dto.PokemonPlusInfoDto;
 import com.pokemon.api.model.pagin.PaginatedPokemons;
 import com.pokemon.api.model.pokemons.InfoPokemons;
 import com.pokemon.api.model.pokemons.PokemonsUris;
-import com.pokemon.api.model.pokemons.atributes.Characteristic;
-import com.pokemon.api.model.pokemons.atributes.Description;
+import com.pokemon.api.model.pokemons.atributes.*;
 import com.pokemon.api.search.Interface.IGoPokeApi;
 import com.pokemon.api.service.Interface.IPokemon;
 
@@ -27,7 +28,6 @@ public class ImplPokemon implements IPokemon {
 	public InfoPokemons getPokemonsInfo(int limit, int offset) {
 		return IGo.getPokemonsInfo(limit, offset);
 	}
-
 	
 	@Override
 	public PaginatedPokemons getAllPokemons(int limit, int offset) {
@@ -51,21 +51,31 @@ public class ImplPokemon implements IPokemon {
 	public PokemonPlusInfoDto getPokemonByName(String name) {
 		PokemonPlusInfoDto pokemon = IGo.getPokemonInfo(name);
 		
-		int id = pokemon.getId();
-		if(id <= 30) {
-			Characteristic characteristic = IGo.getDescription(id);
-			for (Description des : characteristic.getDescriptions()) {
-				String languaje = des.getLanguage().getName();
-				if(languaje.matches("es")) {
-					pokemon.setCharacteristic(des);
-				}else {
-					des.setDescription("No se encuentra alguna descripcion en español");
-					des.setLanguage(null);
-					pokemon.setCharacteristic(des);
+		for(Stats states : getAllStats(name)) {
+			Stat stat = states.getStat();
+			List<Characteristics> characts = getStat(URI.create(stat.getUrl()));
+			for(Characteristics chars : characts) {
+				String url = chars.getUrl();
+				Characteristic characteristic = IGo.getDescription(URI.create(url));
+				for (Description des : characteristic.getDescriptions()) {
+					String languaje = des.getLanguage().getName();
+					if(languaje.matches("es")) {
+						pokemon.getCharacteristic().add(des);
+					}
 				}
 			}
 		}
 		return pokemon;
+	}
+	
+	public List<Stats> getAllStats(String name) {
+		PokemonDescriptionsDto urlStats = IGo.getAllStats(name);
+		return urlStats.getStats();
+	}
+	
+	public List<Characteristics> getStat(URI uri) {
+		CharacteristicsUrlDTO urlChars = IGo.getUrlCharacts(uri);
+		return urlChars.getCharacteristics();
 	}
 	
 }
