@@ -21,7 +21,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ImplPokemon implements IPokemon {
 	private final IGoPokeApi IGo;
-	private final URI baseUrl = URI.create("https://pokeapi.co/api/v2/");
 
 	
 	@Override
@@ -50,18 +49,20 @@ public class ImplPokemon implements IPokemon {
 
 	@Override
 	public PokemonPlusInfoDto getPokemonByName(String name) {
-		URI uriPokemon = URI.create(baseUrl + "pokemon/" + name);		
-		PokemonPlusInfoDto pokemon = IGo.getPokemonInfo(uriPokemon);
+		PokemonPlusInfoDto pokemon = IGo.getPokemonInfo(name);
 		
 		int id = pokemon.getId();
-		URI uriDes = URI.create(baseUrl + "characteristic/" + id);
-		Characteristic characteristic = IGo.getDescription(uriDes);
-		
-		for (Description des : characteristic.getDescriptions()) {
-			String languaje = des.getLanguage().getName();
-		 
-			if(languaje.matches("es")) {
-				pokemon.setCharacteristic(des);
+		if(id <= 30) {
+			Characteristic characteristic = IGo.getDescription(id);
+			for (Description des : characteristic.getDescriptions()) {
+				String languaje = des.getLanguage().getName();
+				if(languaje.matches("es")) {
+					pokemon.setCharacteristic(des);
+				}else {
+					des.setDescription("No se encuentra alguna descripcion en español");
+					des.setLanguage(null);
+					pokemon.setCharacteristic(des);
+				}
 			}
 		}
 		return pokemon;

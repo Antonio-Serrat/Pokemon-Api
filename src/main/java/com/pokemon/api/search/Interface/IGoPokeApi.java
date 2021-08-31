@@ -14,8 +14,8 @@ public interface IGoPokeApi {
 
 	InfoPokemons getPokemonsInfo(int limit, int offset);
 	PokemonBasicDto getPokemon(URI uri);
-	PokemonPlusInfoDto getPokemonInfo(URI uri);
-	Characteristic getDescription(URI uri);
+	PokemonPlusInfoDto getPokemonInfo(String name);
+	Characteristic getDescription(int id);
 	
 	
 }
